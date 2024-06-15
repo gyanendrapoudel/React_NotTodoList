@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Form from './components/Form'
+import {Table, Form} from './components'
 import './App.css'
 
 function App() {
@@ -21,7 +21,9 @@ function App() {
       <h1 className="text-center mb-5">Not To Do Lists</h1>
       {/* form */}
       <Form handleSubmit={handleSubmit}/>
+
       {/* table */}
+      <Table/>
     </div>
   )
 }
