@@ -1,7 +1,7 @@
-const Table = ({ taskList, handleSwitchTask }) => {
+const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
   const entryList = taskList.filter((list) => list.type === 'Entry')
   const badList = taskList.filter((list) => list.type === 'bad')
-
+  
   return (
     <div className="row mt-5 p-5">
       <div className="col-md-6 p-3">
@@ -16,7 +16,7 @@ const Table = ({ taskList, handleSwitchTask }) => {
                   <td className="">{item.hr}</td>
                   <td className="text-end">
                     <button
-                      onClick="handleOnDelete('${item.id}')"
+                      onClick={()=>handleDelete(item.id)}
                       className="btn btn-danger"
                     >
                       <i className="fa-solid fa-trash "></i>
@@ -52,9 +52,7 @@ const Table = ({ taskList, handleSwitchTask }) => {
                       <i className="fa-solid fa-arrow-left"></i>
                     </button>
                     <button
-                      onClick="handleOnDelete('${
-                              item.id
-                            }')"
+                      onClick={() => handleDelete(item.id)}
                       className="btn btn-danger"
                     >
                       <i className="fa-solid fa-trash "></i>

@@ -27,6 +27,12 @@ function App() {
 
     setTaskList(newList)
   }
+  const handleDelete = (id)=>{
+    const proceed = confirm("Are you sure you want to delete this ")
+    if(proceed){
+    const newTaskList = taskList.filter((list)=>list.id!==id)
+    setTaskList(newTaskList)}
+  }
   const addTaskList = (objTask)=>{
     const obj = {...objTask, type:"Entry", id: randomIdGenerator()}
     setTaskList([...taskList, obj])
@@ -56,7 +62,7 @@ function App() {
       <Form addTaskList={addTaskList} />
 
       {/* table */}
-      <Table taskList={taskList} handleSwitchTask={handleSwitchTask} />
+      <Table taskList={taskList} handleSwitchTask={handleSwitchTask} handleDelete={handleDelete} />
     </div>
   )
 }
