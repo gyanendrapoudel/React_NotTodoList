@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import {Table, Form} from './components'
 import './App.css'
-
+const hoursPerWeek = 24*7;
 function App() {
   const [taskList, setTaskList]  = useState([])
  
+  
   const handleSwitchTask = (id, type)=>{
     if (type === 'Entry') {
       const newList = taskList.map((list) => {
@@ -33,7 +34,12 @@ function App() {
     const newTaskList = taskList.filter((list)=>list.id!==id)
     setTaskList(newTaskList)}
   }
+  const occupiedHour = taskList.reduce((acc,list)=>acc+parseInt(list.hr),0) 
+
   const addTaskList = (objTask)=>{
+    if(occupiedHour+parseInt(objTask.hr)>hoursPerWeek){
+      return alert("Maximum hours reached")
+    }
     const obj = {...objTask, type:"Entry", id: randomIdGenerator()}
     setTaskList([...taskList, obj])
   }

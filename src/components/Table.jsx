@@ -16,7 +16,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
                   <td className="">{item.hr}</td>
                   <td className="text-end">
                     <button
-                      onClick={()=>handleDelete(item.id)}
+                      onClick={() => handleDelete(item.id)}
                       className="btn btn-danger"
                     >
                       <i className="fa-solid fa-trash "></i>
@@ -64,13 +64,23 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
           </tbody>
         </table>
         <div className=" bg-light p-2 rounded">
-          You Could have saved <span id="savedHour">0</span> hours
+          You Could have saved{' '}
+          <span id="savedHour">
+            {badList.reduce((acc, item) => acc + parseInt(item.hr), 0)}
+          </span>{' '}
+          hours
         </div>
       </div>
 
       {/* <!-- total Allocated hours --> */}
       <div className=" bg-light p-2 mt-3 rounded ">
-        You have allocated <span id="totalHour"></span> hours
+        You have allocated{' '}
+        <span id="totalHour">{
+          badList.reduce((acc, item) => acc + parseInt(item.hr), 0)+
+          entryList.reduce((acc, item) => acc + parseInt(item.hr), 0)
+        }
+        </span>{' '}
+        hours
       </div>
     </div>
   )
