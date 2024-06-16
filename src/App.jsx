@@ -37,7 +37,7 @@ function App() {
       <Form addTaskList={addTaskList} />
 
       {/* table */}
-      <Table />
+      <Table taskList={taskList}/>
     </div>
   )
 }
