@@ -9,7 +9,6 @@ const Form = ({addTaskList}) => {
   }
   const handleSubmit = (e)=>{
       e.preventDefault()
-      console.log(form)
       addTaskList(form)
       // e.currentTarget.reset()
     }

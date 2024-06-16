@@ -4,7 +4,29 @@ import './App.css'
 
 function App() {
   const [taskList, setTaskList]  = useState([])
+ 
+  const handleSwitchTask = (id, type)=>{
+    if (type === 'Entry') {
+      const newList = taskList.map((list) => {
+        if (list.id === id) {
+          list.type = 'bad'
+        }
+        return list
+      })
+      return setTaskList(newList)
+    }
+    if (type === 'bad') {
+      const newList = taskList.map((list) => {
+        if (list.id === id) {
+          list.type = 'Entry'
+        }
+        return list
+      })
+      return setTaskList(newList)
+    }
 
+    setTaskList(newList)
+  }
   const addTaskList = (objTask)=>{
     const obj = {...objTask, type:"Entry", id: randomIdGenerator()}
     setTaskList([...taskList, obj])
@@ -28,16 +50,13 @@ function App() {
     }
     
   return (
-    <div
-      className="pt-5"
-      style={wrapper}
-    >
+    <div className="pt-5" style={wrapper}>
       <h1 className="text-center mb-5">Not To Do Lists</h1>
       {/* form */}
       <Form addTaskList={addTaskList} />
 
       {/* table */}
-      <Table taskList={taskList}/>
+      <Table taskList={taskList} handleSwitchTask={handleSwitchTask} />
     </div>
   )
 }
