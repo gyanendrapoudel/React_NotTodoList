@@ -1,4 +1,5 @@
 const Table = () => {
+  
   return (
    <div className="row mt-5 p-5">
             <div className="col-md-6 p-3">
@@ -28,7 +29,7 @@ const Table = () => {
 
         {/* <!-- total Allocated hours --> */}
          <div className=" bg-light p-2 mt-3 rounded ">
-            You  have allocated <span id="totalHour">0</span> hours
+            You  have allocated <span id="totalHour"></span> hours
          </div>
         </div>
   )
