@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import {Table, Form} from './components'
 import './App.css'
+import { postRequest } from './axios/axios';
 const hoursPerWeek = 24*7;
 function App() {
   const [taskList, setTaskList]  = useState([])
- 
+  const [response, setResponse] = useState({})
   
   const handleSwitchTask = (id, type)=>{
     if (type === 'Entry') {
@@ -36,12 +37,14 @@ function App() {
   }
   const occupiedHour = taskList.reduce((acc,list)=>acc+parseInt(list.hr),0) 
 
-  const addTaskList = (objTask)=>{
+  const addTaskList = async(objTask)=>{
     if(occupiedHour+parseInt(objTask.hr)>hoursPerWeek){
       return alert("Maximum hours reached")
     }
-    const obj = {...objTask, type:"Entry", id: randomIdGenerator()}
-    setTaskList([...taskList, obj])
+    // const obj = {...objTask, type:"Entry", id: randomIdGenerator()}
+    // setTaskList([...taskList, obj])
+    const resp = await postRequest(objTask)
+    setResponse(resp)
   }
 
   const randomIdGenerator=(length=6)=>{
@@ -64,6 +67,10 @@ function App() {
   return (
     <div className="pt-5" style={wrapper}>
       <h1 className="text-center mb-5">Not To Do Lists</h1>
+      {/* alert msg */}
+      <div className={response?.status==='success'?"alert alert-success w-50 m-auto my-2":"alert alert-danger w-50 m-auto my-2"}>
+        {response?.msg}
+      </div>
       {/* form */}
       <Form addTaskList={addTaskList} />
 
