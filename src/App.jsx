@@ -14,18 +14,14 @@ function App() {
      renderOnce.current=false
     }, [])
   const handleSwitchTask = async (id, type)=>{
-    console.log(id, type)
-    if(type==='entry'){
-     const resp = await editTask(id, "bad")
+   
+  
+     const resp = await editTask(id, type)
      setResponse(resp)
      resp?.status==="success" && fetchingTasks()
   
-    }
-      if(type==='bad'){
-        const resp = await editTask(id, 'entry')
-         setResponse(resp)
-      resp?.status === 'success'&&fetchingTasks()
-      }
+    
+     
     // if (type === 'entry') {
     //   const newList = taskList.map((list) => {
     //     if (list.id === id) {

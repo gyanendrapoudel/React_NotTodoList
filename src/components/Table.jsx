@@ -23,7 +23,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
                       <i className="fa-solid fa-trash "></i>
                     </button>
                     <button
-                      onClick={() => handleSwitchTask(item?._id, item?.type)}
+                      onClick={() => handleSwitchTask(item?._id, 'bad')}
                       className="btn btn-success"
                     >
                       <i className="fa-solid fa-arrow-right"></i>
@@ -47,7 +47,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
                   <td className="">{item.hr}</td>
                   <td className="text-end">
                     <button
-                      onClick={() => handleSwitchTask(item?._id, item.type)}
+                      onClick={() => handleSwitchTask(item?._id, 'entry')}
                       className="btn btn-warning"
                     >
                       <i className="fa-solid fa-arrow-left"></i>
