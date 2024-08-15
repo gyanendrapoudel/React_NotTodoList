@@ -1,7 +1,7 @@
 const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
   const entryList = taskList.filter((list) => list.type === 'entry')
   const badList = taskList.filter((list) => list.type === 'bad')
-  console.log(taskList)
+
   return (
     <div className="row mt-5 p-5">
     
@@ -11,7 +11,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
           <tbody id="entryList">
             {entryList.map((item, i) => {
               return (
-                <tr key={item.id}>
+                <tr key={item?._id}>
                   <td className="">{i + 1}</td>
                   <td className="">{item.task}</td>
                   <td className="">{item.hr}</td>
@@ -41,7 +41,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
           <tbody id="badList">
             {badList.map((item, i) => {
               return (
-                <tr key={item.id}>
+                <tr key={item._id}>
                   <td className="">{i + 1}</td>
                   <td className="">{item.task}</td>
                   <td className="">{item.hr}</td>

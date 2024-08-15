@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {Table, Form} from './components'
 import './App.css'
 import { getAllTasks, postRequest } from './axios/axios';
@@ -6,9 +6,12 @@ const hoursPerWeek = 24*7;
 function App() {
   const [taskList, setTaskList]  = useState([])
   const [response, setResponse] = useState({})
+  const renderOnce = useRef(true)
+  console.log(renderOnce.current)
    
     useEffect(() => {
-      fetchingTasks()
+     renderOnce.current && fetchingTasks()
+     renderOnce.current=false
     }, [])
   const handleSwitchTask = (id, type)=>{
     if (type === 'Entry') {
