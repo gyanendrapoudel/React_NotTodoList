@@ -1,9 +1,10 @@
 const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
-  const entryList = taskList.filter((list) => list.type === 'Entry')
+  const entryList = taskList.filter((list) => list.type === 'entry')
   const badList = taskList.filter((list) => list.type === 'bad')
-  
+  console.log(taskList)
   return (
     <div className="row mt-5 p-5">
+    
       <div className="col-md-6 p-3">
         <h3 className="text-center">Entry Lists</h3>
         <table className="table table-striped border ">

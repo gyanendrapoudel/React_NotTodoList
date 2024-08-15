@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import {Table, Form} from './components'
 import './App.css'
-import { postRequest } from './axios/axios';
+import { getAllTasks, postRequest } from './axios/axios';
 const hoursPerWeek = 24*7;
 function App() {
   const [taskList, setTaskList]  = useState([])
   const [response, setResponse] = useState({})
-  
+   
+    useEffect(() => {
+      fetchingTasks()
+    }, [])
   const handleSwitchTask = (id, type)=>{
     if (type === 'Entry') {
       const newList = taskList.map((list) => {
@@ -56,26 +59,44 @@ function App() {
     }
     return randomId
   }
-
+  const fetchingTasks = async ()=>{
+   
+    const result = await getAllTasks()
+    result?.status==="success"&&setTaskList(result.tasks)
+   
+  }
   
   const wrapper = 
     { 
       minHeight: "100vh",
       background:"linear-gradient(rgba(208, 109, 208, 0.746),rgba(132, 49, 49, 0.57))",    
     }
-    
+
   return (
     <div className="pt-5" style={wrapper}>
       <h1 className="text-center mb-5">Not To Do Lists</h1>
       {/* alert msg */}
-      <div className={response?.status==='success'?"alert alert-success w-50 m-auto my-2":"alert alert-danger w-50 m-auto my-2"}>
-        {response?.msg}
-      </div>
+      {response?.msg && (
+        <div
+          className={
+            response?.status === 'success'
+              ? 'alert alert-success w-50 m-auto my-2'
+              : 'alert alert-danger w-50 m-auto my-2'
+          }
+        >
+          {response?.msg}
+        </div>
+      )}
       {/* form */}
       <Form addTaskList={addTaskList} />
 
       {/* table */}
-      <Table taskList={taskList} handleSwitchTask={handleSwitchTask} handleDelete={handleDelete} />
+      
+      <Table
+        taskList={taskList}
+        handleSwitchTask={handleSwitchTask}
+        handleDelete={handleDelete}
+      />
     </div>
   )
 }
