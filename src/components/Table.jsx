@@ -41,9 +41,9 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
             {badList.map((item, i) => {
               return (
                 <tr key={item.id}>
-                  <td className="">${i + 1}</td>
-                  <td className="">${item.task}</td>
-                  <td className="">${item.hr}</td>
+                  <td className="">{i + 1}</td>
+                  <td className="">{item.task}</td>
+                  <td className="">{item.hr}</td>
                   <td className="text-end">
                     <button
                       onClick={() => handleSwitchTask(item.id, item.type)}
