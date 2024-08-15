@@ -18,4 +18,16 @@ export const getAllTasks = async()=>{
             msg:error.message
         }
     }
+
+}
+export const editTask = async (_id,type)=>{
+    try {
+        const response = await axios.patch(apiEP,{_id,type})
+        return response.data
+    } catch (error) {
+        return {
+            status:"error",
+            msg:"Something went wrong"
+        }
+    }
 }

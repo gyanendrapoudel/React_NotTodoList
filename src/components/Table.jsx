@@ -17,13 +17,13 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
                   <td className="">{item.hr}</td>
                   <td className="text-end">
                     <button
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => handleDelete(item?._id)}
                       className="btn btn-danger"
                     >
                       <i className="fa-solid fa-trash "></i>
                     </button>
                     <button
-                      onClick={() => handleSwitchTask(item.id, item.type)}
+                      onClick={() => handleSwitchTask(item?._id, item?.type)}
                       className="btn btn-success"
                     >
                       <i className="fa-solid fa-arrow-right"></i>
@@ -47,7 +47,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
                   <td className="">{item.hr}</td>
                   <td className="text-end">
                     <button
-                      onClick={() => handleSwitchTask(item.id, item.type)}
+                      onClick={() => handleSwitchTask(item?._id, item.type)}
                       className="btn btn-warning"
                     >
                       <i className="fa-solid fa-arrow-left"></i>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {Table, Form} from './components'
 import './App.css'
-import { getAllTasks, postRequest } from './axios/axios';
+import { editTask, getAllTasks, postRequest } from './axios/axios';
 const hoursPerWeek = 24*7;
 function App() {
   const [taskList, setTaskList]  = useState([])
@@ -13,27 +13,39 @@ function App() {
      renderOnce.current && fetchingTasks()
      renderOnce.current=false
     }, [])
-  const handleSwitchTask = (id, type)=>{
-    if (type === 'Entry') {
-      const newList = taskList.map((list) => {
-        if (list.id === id) {
-          list.type = 'bad'
-        }
-        return list
-      })
-      return setTaskList(newList)
+  const handleSwitchTask = async (id, type)=>{
+    console.log(id, type)
+    if(type==='entry'){
+     const resp = await editTask(id, "bad")
+     setResponse(resp)
+     resp?.status==="success" && fetchingTasks()
+  
     }
-    if (type === 'bad') {
-      const newList = taskList.map((list) => {
-        if (list.id === id) {
-          list.type = 'Entry'
-        }
-        return list
-      })
-      return setTaskList(newList)
-    }
+      if(type==='bad'){
+        const resp = await editTask(id, 'entry')
+         setResponse(resp)
+      resp?.status === 'success'&&fetchingTasks()
+      }
+    // if (type === 'entry') {
+    //   const newList = taskList.map((list) => {
+    //     if (list.id === id) {
+    //       list.type = 'bad'
+    //     }
+    //     return list
+    //   })
+    //   return setTaskList(newList)
+    // }
+    // if (type === 'bad') {
+    //   const newList = taskList.map((list) => {
+    //     if (list.id === id) {
+    //       list.type = 'Entry'
+    //     }
+    //     return list
+    //   })
+    //   return setTaskList(newList)
+    // }
 
-    setTaskList(newList)
+    // setTaskList(newList)
   }
   const handleDelete = (id)=>{
     const proceed = confirm("Are you sure you want to delete this ")
