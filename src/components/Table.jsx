@@ -140,7 +140,13 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
           hours
         </div>
       </div>
-
+      {itemToDelete.length > 0 && (
+        <div className="  text-center">
+          <button className="btn btn-danger w-50">
+            {itemToDelete.length} Tasks(s)
+          </button>
+        </div>
+      )}
       {/* <!-- total Allocated hours --> */}
       <div className=" bg-light p-2 mt-3 rounded ">
         You have allocated{' '}
