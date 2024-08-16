@@ -7,41 +7,18 @@ function App() {
   const [taskList, setTaskList]  = useState([])
   const [response, setResponse] = useState({})
   const renderOnce = useRef(true)
-  console.log(renderOnce.current)
    
     useEffect(() => {
-     renderOnce.current && fetchingTasks()
-     renderOnce.current=false
+    //  renderOnce.current && 
+    fetchingTasks()
+    //  renderOnce.current=false
     }, [])
   const handleSwitchTask = async (id, type)=>{
    
-  
      const resp = await editTask(id, type)
      setResponse(resp)
      resp?.status==="success" && fetchingTasks()
   
-    
-     
-    // if (type === 'entry') {
-    //   const newList = taskList.map((list) => {
-    //     if (list.id === id) {
-    //       list.type = 'bad'
-    //     }
-    //     return list
-    //   })
-    //   return setTaskList(newList)
-    // }
-    // if (type === 'bad') {
-    //   const newList = taskList.map((list) => {
-    //     if (list.id === id) {
-    //       list.type = 'Entry'
-    //     }
-    //     return list
-    //   })
-    //   return setTaskList(newList)
-    // }
-
-    // setTaskList(newList)
   }
   const handleDelete = (id)=>{
     const proceed = confirm("Are you sure you want to delete this ")
@@ -55,25 +32,17 @@ function App() {
     if(occupiedHour+parseInt(objTask.hr)>hoursPerWeek){
       return alert("Maximum hours reached")
     }
-    // const obj = {...objTask, type:"Entry", id: randomIdGenerator()}
-    // setTaskList([...taskList, obj])
+
     const resp = await postRequest(objTask)
     setResponse(resp)
+    setTaskList([...taskList, resp.result])
   }
 
-  const randomIdGenerator=(length=6)=>{
-    const str = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGJKLZXCVBNM1234567890"
-    let randomId=''
-    for(let i=0; i<length; i++){
-      const randomIndex = Math.floor(Math.random()*str.length)
-      randomId+=str[randomIndex]
-    }
-    return randomId
-  }
+ 
   const fetchingTasks = async ()=>{
    
     const result = await getAllTasks()
-    result?.status==="success"&&setTaskList(result.tasks)
+    result?.status==="success" && setTaskList(result.tasks)
    
   }
   
