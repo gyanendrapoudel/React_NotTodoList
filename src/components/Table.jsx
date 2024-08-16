@@ -30,7 +30,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
           setItemToDelete(itemToDelete.filter((id)=>id!==value))
     }
   }
-  console.log(itemToDelete)
+  
   return (
     <div className="row mt-5 p-5">
       <div className="col-md-6 p-3">
@@ -42,7 +42,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
           onChange={handleChange}
           id="entryTasks"
         />
-        <label className="form-check-label fs-5" htmlFor="entryTasks">
+        <label className="form-check-label fs-5 mb-2" htmlFor="entryTasks">
           Select All
         </label>
         <table className="table table-striped border ">
@@ -64,12 +64,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
                   <td className="">{item.task}</td>
                   <td className="">{item.hr}</td>
                   <td className="text-end">
-                    <button
-                      onClick={() => handleDelete(item?._id)}
-                      className="btn btn-danger"
-                    >
-                      <i className="fa-solid fa-trash "></i>
-                    </button>
+                   
                     <button
                       onClick={() => handleSwitchTask(item?._id, 'bad')}
                       className="btn btn-success"
@@ -92,7 +87,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
           id="badTasks"
           onChange={handleChange}
         />
-        <label className="form-check-label fs-5" htmlFor="badTasks">
+        <label className="form-check-label fs-5 mb-2" htmlFor="badTasks">
           Select All
         </label>
         <table className="table table-striped border">
@@ -120,12 +115,7 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
                     >
                       <i className="fa-solid fa-arrow-left"></i>
                     </button>
-                    <button
-                      onClick={() => handleDelete(item.id)}
-                      className="btn btn-danger"
-                    >
-                      <i className="fa-solid fa-trash "></i>
-                    </button>
+                   
                   </td>
                 </tr>
               )
@@ -142,7 +132,10 @@ const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
       </div>
       {itemToDelete.length > 0 && (
         <div className="  text-center">
-          <button className="btn btn-danger w-50">
+          <button
+            className="btn btn-danger w-50"
+            onClick={()=>handleDelete(itemToDelete)}
+          >
             {itemToDelete.length} Tasks(s)
           </button>
         </div>

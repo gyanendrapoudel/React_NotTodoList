@@ -20,7 +20,8 @@ function App() {
      resp?.status==="success" && fetchingTasks()
   
   }
-  const handleDelete = (id)=>{
+  const handleDelete = (items)=>{
+    return console.log(items)
     const proceed = confirm("Are you sure you want to delete this ")
     if(proceed){
     const newTaskList = taskList.filter((list)=>list.id!==id)
