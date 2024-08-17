@@ -1,35 +1,8 @@
 import { useState } from "react"
 
-const Table = ({ taskList, handleSwitchTask, handleDelete}) => {
-  const [itemToDelete, setItemToDelete]=useState([])
-  const entryList = taskList.filter((list) => list.type === 'entry')
-  const badList = taskList.filter((list) => list.type === 'bad')
-  const handleChange= (e)=>{
-    const {checked, value} = e.target
-    let tempArray=[]
-    if(value==="entry"){
-       tempArray=entryList
-    }
-    if(value ==="bad"){
-      tempArray=badList
-    }
-    if(checked){
-      if(value==="entry" || value==="bad"){
-          const newList = tempArray.filter((list)=> !itemToDelete.includes(list._id))
-          const newListId = newList.map((list)=>list._id)
-          return setItemToDelete([...itemToDelete,...newListId])
-      }
-      !itemToDelete.includes(value) && setItemToDelete([...itemToDelete,value])
-    }else{
-          if(value==="entry" || value==='bad'){
-            const ids = tempArray.map((item)=>item._id)
-            return setItemToDelete(
-              itemToDelete.filter((item) => !ids.includes(item))
-            )
-          }
-          setItemToDelete(itemToDelete.filter((id)=>id!==value))
-    }
-  }
+const Table = ({  handleChange,itemToDelete,badList,entryList, handleSwitchTask, handleDelete}) => {
+
+  
   
   return (
     <div className="row mt-5 p-5">
