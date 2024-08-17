@@ -25,3 +25,7 @@ export const getAllTasks = async()=>{
 export const editTask = async (_id,type)=>{
     return apiRequests("patch", {_id, type})
 }
+export const deleteTasks = async (ids)=>{
+    console.log(ids)
+    return apiRequests("delete",ids)
+}

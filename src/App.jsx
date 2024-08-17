@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {Table, Form} from './components'
 import './App.css'
-import { editTask, getAllTasks, postRequest } from './axios/axios';
+import { deleteTasks, editTask, getAllTasks, postRequest } from './axios/axios';
 const hoursPerWeek = 24*7;
 function App() {
   const [taskList, setTaskList]  = useState([])
@@ -20,12 +20,15 @@ function App() {
      resp?.status==="success" && fetchingTasks()
   
   }
-  const handleDelete = (items)=>{
-    return console.log(items)
+  const handleDelete = async (items)=>{
+   
     const proceed = confirm("Are you sure you want to delete this ")
     if(proceed){
-    const newTaskList = taskList.filter((list)=>list.id!==id)
-    setTaskList(newTaskList)}
+     const resp = await deleteTasks(items)
+     setResponse(resp)
+     resp?.status === 'success' && fetchingTasks()
+    
+  }
   }
   const occupiedHour = taskList.reduce((acc,list)=>acc+parseInt(list.hr),0) 
 
