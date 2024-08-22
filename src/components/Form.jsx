@@ -20,13 +20,15 @@ const Form = ({addTaskList}) => {
                  <input  type="text"className="ps-2 " placeholder="Task" 
                  name="task"
                  id="task"
+                 required
                  onChange={handleChange}
                   
                   />
             </div>
             <div className="col-md-2 d-grid ">
-                <input type="number" placeholder="0" min="1" className="ps-2" name="hr" id="hr"
+                <input type="number" placeholder="0" min="1" max={100} className="ps-2" name="hr" id="hr"
                 onChange={handleChange}
+                required
                 />
 
             </div>

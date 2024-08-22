@@ -8,16 +8,20 @@ const Table = ({  handleChange,itemToDelete,badList,entryList, handleSwitchTask,
     <div className="row mt-5 p-5">
       <div className="col-md-6 p-3">
         <h3 className="text-center">Entry Lists</h3>
-        <input
-          className="form-check-input me-2 fs-5"
-          type="checkbox"
-          value="entry"
-          onChange={handleChange}
-          id="entryTasks"
-        />
-        <label className="form-check-label fs-5 mb-2" htmlFor="entryTasks">
-          Select All
-        </label>
+        {itemToDelete.length > 0 && (
+          <div>
+            <input
+              className="form-check-input me-2 fs-5"
+              type="checkbox"
+              value="entry"
+              onChange={handleChange}
+              id="entryTasks"
+            />
+            <label className="form-check-label fs-5 mb-2" htmlFor="entryTasks">
+              Select All
+            </label>
+          </div>
+        )}
         <table className="table table-striped border ">
           <tbody id="entryList">
             {entryList.map((item, i) => {
@@ -37,7 +41,6 @@ const Table = ({  handleChange,itemToDelete,badList,entryList, handleSwitchTask,
                   <td className="">{item.task}</td>
                   <td className="">{item.hr}</td>
                   <td className="text-end">
-                   
                     <button
                       onClick={() => handleSwitchTask(item?._id, 'bad')}
                       className="btn btn-success"
@@ -53,16 +56,20 @@ const Table = ({  handleChange,itemToDelete,badList,entryList, handleSwitchTask,
       </div>
       <div className="col-md-6 p-3">
         <h3 className="text-center">Bad Lists</h3>
-        <input
-          className="form-check-input me-2 fs-5"
-          type="checkbox"
-          value="bad"
-          id="badTasks"
-          onChange={handleChange}
-        />
-        <label className="form-check-label fs-5 mb-2" htmlFor="badTasks">
-          Select All
-        </label>
+        {itemToDelete.length > 0 && (
+          <div>
+            <input
+              className="form-check-input me-2 fs-5"
+              type="checkbox"
+              value="bad"
+              id="badTasks"
+              onChange={handleChange}
+            />
+            <label className="form-check-label fs-5 mb-2" htmlFor="badTasks">
+              Select All
+            </label>
+          </div>
+        )}
         <table className="table table-striped border">
           <tbody id="badList">
             {badList.map((item, i) => {
@@ -88,7 +95,6 @@ const Table = ({  handleChange,itemToDelete,badList,entryList, handleSwitchTask,
                     >
                       <i className="fa-solid fa-arrow-left"></i>
                     </button>
-                   
                   </td>
                 </tr>
               )
@@ -107,7 +113,7 @@ const Table = ({  handleChange,itemToDelete,badList,entryList, handleSwitchTask,
         <div className="  text-center">
           <button
             className="btn btn-danger w-50"
-            onClick={()=>handleDelete(itemToDelete)}
+            onClick={() => handleDelete(itemToDelete)}
           >
             {itemToDelete.length} Tasks(s)
           </button>
